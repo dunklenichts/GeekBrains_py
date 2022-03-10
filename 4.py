@@ -1,24 +1,45 @@
-# 4. Пользователь вводит целое положительное число. 
-#    Найдите самую большую цифру в числе. 
-#     Для решения используйте цикл while и арифметические операции.
+"""
+    Программа принимает действительное положительное число x
+    и целое отрицательное число y. Выполните возведение числа
+    x в степень y. Задание реализуйте в виде функции my_func(x, y).
+    При решении задания нужно обойтись без встроенной функции
+    возведения числа в степень.
+"""
 
-n = input('Enter a number')
-if n.isdigit() == False:
-    print('Enter an integer number')
-elif n.isdigit():
-        n = int(n)
-        max = n % 10
-        n = n // 10
-        while n > 0:
-            # print(f"max first = {max}")
-            # print(f"n1 = {n}, elif = {n%10}")
-            if ((n % 10) >= max):
-                max = n % 10
-                n = n // 10
-                # print(f"max = {max}")
-            elif ((n % 10) < max):
-                n = n // 10
-                # print(f"n = {n}")
-            else:
-                break
-        print(f"The highest number is {max}")
+x = input('Enter a number (x): ')
+y = input('Enter a degree of the number (-y): ')
+
+if (x.isdigit() == False):
+    print('ERROR: enter an integer/float number.')
+else:
+    x = float(x)    # меняем тип переменной х в соответствии с поставленной задачей
+    y = abs(int(y)) # берем у по модулю, в случае, если пользователь ввел отрицательное число
+
+    def my_func(x, y): # Первый способ с использованием цикла
+
+        """Функиця, возводящая число х в степень -у
+
+        Именованные параметры:
+        count -- вспомогательный параметр для цикла while
+        fist -- изначальное значение х
+        x -- введенное число для возведения в степень
+        y -- степень
+        """
+        count = 1
+        first = x
+        while count != y:
+            x = x * first
+            count += 1
+        return 1 / x
+
+    print(f"result: {my_func(x, y):.2}")
+
+
+
+    # def my_func2(x, y): # Второй способ с использованием оператора **
+    #     x = x ** y
+    #     return x
+    #
+    # print(f"result: {my_func2(x, y)}")
+
+
