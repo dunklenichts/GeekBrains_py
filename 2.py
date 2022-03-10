@@ -1,13 +1,25 @@
-# 2. Пользователь вводит время в секундах. 
-#    Переведите время в часы, минуты, секунды и выведите в формате чч:мм:сс. 
-#    Используйте форматирование строк.
+"""
+    Выполнить функцию, которая принимает несколько параметров,
+    описывающих данные пользователя: имя, фамилия, год рождения,
+    город проживания, email, телефон. Функция должна принимать
+    параметры как именованные аргументы. Осуществить вывод данных
+    о пользователе одной строкой.
+"""
 
-time = int(input('Enter time in seconds: '))
-if time < 0:
-    print('ERROR')
-else:
-    minutes = time // 60
-    hours = minutes // 60
-    minutes = minutes % 60
-    seconds = time - hours * 3600 - minutes * 60
-    print(f"{hours} hrs {minutes} min {seconds} sec")
+def info (name, srname, b_year, town, email, phone):
+
+    """
+    Функция приницмает аргументы и объединяет их в строку с помощью
+    пробела (' '.join())
+
+    Именованные параметры:
+    name -- имя
+    srname -- фамилия
+    b_year -- год рождения
+    town -- город рождения
+    email -- почта
+    phone -- телефон
+    """
+    return ' '.join([name, srname, b_year, town, email, phone])
+
+print(info(name = 'Ivan', srname = 'Ivanov', b_year = '1999', town = 'Town', email = 'mail@mail.ru', phone = '999-999-99-99'))

@@ -1,12 +1,26 @@
-# 1. Поработайте с переменными, создайте несколько, выведите на экран. 
-#    Запросите у пользователя некоторые числа и строки и сохраните в переменные, 
-#    затем выведите на экран.
+"""
+    Реализовать функцию, принимающую два числа
+    (позиционные аргументы) и выполняющую их деление.
+    Числа запрашивать у пользователя, предусмотреть
+    обработку ситуации деления на ноль.
+"""
 
-name = input('Enter your name: ')
-print(f'Hello, {name}')
-number = input('Enter a number: ')
-number = int(number)
-if number:
-    print(f'Your number is {number}')
+a = input('Enter first number (a): ')
+b = input('Enter second number (b): ')
+if (b == 0):                                            # провека на нуль
+    print('Enter b > 0. ERROR')
+elif (a.isdigit() == False) or (b.isdigit() == False):  # проверка вводимых символов на числа
+    print('Enter an integer or a float number.')
 else:
-    print('Enter a number')
+    a = float(a)                                        # изменение типа введенных переменных
+    b = float(b)
+    delete = lambda a, b: a / b
+
+    """Функция выполняет деление двух чисел, которые
+    запрашивает у пользователя.
+    
+    Именованные параметры:
+    а -- делимое
+    b -- делитель"""
+
+    print(f"a / b = {delete(a, b):.2}")
