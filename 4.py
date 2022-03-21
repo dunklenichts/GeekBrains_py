@@ -1,45 +1,23 @@
-"""
-    Программа принимает действительное положительное число x
-    и целое отрицательное число y. Выполните возведение числа
-    x в степень y. Задание реализуйте в виде функции my_func(x, y).
-    При решении задания нужно обойтись без встроенной функции
-    возведения числа в степень.
-"""
+'''
+    Пользователь вводит строку из нескольких слов, разделённых пробелами.
+    Вывести каждое слово с новой строки. Строки нужно пронумеровать.
+    Если слово длинное, выводить только первые 10 букв в слове.
+'''
 
-x = input('Enter a number (x): ')
-y = input('Enter a degree of the number (-y): ')
+input_string = input('Enter a string: ')
+count = 0
+word_list = input_string.split(' ')
 
-if (x.isdigit() == False):
-    print('ERROR: enter an integer/float number.')
-else:
-    x = float(x)    # меняем тип переменной х в соответствии с поставленной задачей
-    y = abs(int(y)) # берем у по модулю, в случае, если пользователь ввел отрицательное число
-
-    def my_func(x, y): # Первый способ с использованием цикла
-
-        """Функиця, возводящая число х в степень -у
-
+for element in range(len(input_string.split(' '))):
+    '''
         Именованные параметры:
-        count -- вспомогательный параметр для цикла while
-        fist -- изначальное значение х
-        x -- введенное число для возведения в степень
-        y -- степень
-        """
-        count = 1
-        first = x
-        while count != y:
-            x = x * first
-            count += 1
-        return 1 / x
-
-    print(f"result: {my_func(x, y):.2}")
-
-
-
-    # def my_func2(x, y): # Второй способ с использованием оператора **
-    #     x = x ** y
-    #     return x
-    #
-    # print(f"result: {my_func2(x, y)}")
-
-
+        count -- количество слов
+        word_list -- список отдельных слов, разделенных пробелом
+        input_string -- исходная строка
+    '''
+    word_list = input_string.split()
+    count += 1
+    if len(str(word_list)) <= 10:
+        print(f'{count}. {word_list[element]}')
+    else:
+        print(f'{count}. {word_list[element][:10]}')
