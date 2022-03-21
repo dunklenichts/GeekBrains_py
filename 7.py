@@ -1,15 +1,22 @@
-# 7. Спортсмен занимается ежедневными пробежками. 
-#    В первый день его результат составил a километров. 
-#    Каждый день спортсмен увеличивал результат на 10% относительно предыдущего. 
-#    Требуется определить номер дня, на который результат спортсмена составит не менее b километров. 
-#    Программа должна принимать значения параметров a и b и выводить одно натуральное число — номер дня.
+"""
+    Продолжить работу над заданием. В программу должна попадать
+    строка из слов, разделённых пробелом. Каждое слово состоит
+    из латинских букв в нижнем регистре. Нужно сделать вывод
+    исходной строки, но каждое слово должно начинаться с заглавной
+    буквы. Используйте написанную ранее функцию int_func().
+"""
 
-a = float(input('Enter km for the first day: '))
-b = float(input('Enter km: '))
-day = 1
-print(f"{day}st day: {a} km")
-while a < b:
-    a += a / 10
-    day += 1
-    print(f"{day}st day: {a:.2f} km")
-print(f"You'll reach the goal in {day} days")
+def int_func(text):
+    new_txt = list(text)
+    new_txt[0] = new_txt[0].upper()
+    return ''.join(new_txt)
+
+def int_func2(text2):
+    result = []
+    word_list = text2.split(' ')
+    for word in word_list:
+        result.append(int_func(word))
+    return ' '.join(result)
+
+s = input("Enter a string: ")
+print(f"{int_func2(s)}")
