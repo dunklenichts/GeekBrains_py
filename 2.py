@@ -1,25 +1,29 @@
 """
-    Выполнить функцию, которая принимает несколько параметров,
-    описывающих данные пользователя: имя, фамилия, год рождения,
-    город проживания, email, телефон. Функция должна принимать
-    параметры как именованные аргументы. Осуществить вывод данных
-    о пользователе одной строкой.
+    Для списка реализовать обмен значений соседних элементов.
+    Значениями обмениваются элементы с индексами 0 и 1, 2 и 3
+    и т. д. При нечётном количестве элементов последний сохранить
+    на своём месте. Для заполнения списка элементов нужно использовать
+    функцию input().
 """
+s = input('Enter a string: ')
+my_list = list(s)
+element = 0
 
-def info (name, srname, b_year, town, email, phone):
-
-    """
-    Функция приницмает аргументы и объединяет их в строку с помощью
-    пробела (' '.join())
-
-    Именованные параметры:
-    name -- имя
-    srname -- фамилия
-    b_year -- год рождения
-    town -- город рождения
-    email -- почта
-    phone -- телефон
-    """
-    return ' '.join([name, srname, b_year, town, email, phone])
-
-print(info(name = 'Ivan', srname = 'Ivanov', b_year = '1999', town = 'Town', email = 'mail@mail.ru', phone = '999-999-99-99'))
+if (len(s) % 2 == 0):
+    while element < len(my_list):
+        '''
+            Именованные параментры:
+            temp -- временная переменная для перестановки
+            element - индекс символа
+        '''
+        temp = my_list[element]
+        my_list[element] = my_list[element + 1]
+        my_list[element + 1] = temp
+        element += 2
+else:
+    while element < (len(my_list) - 1):
+        temp = my_list[element]
+        my_list[element] = my_list[element + 1]
+        my_list[element + 1] = temp
+        element += 2
+print(my_list)
