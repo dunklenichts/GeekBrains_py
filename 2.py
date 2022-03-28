@@ -1,29 +1,21 @@
-"""
-    Для списка реализовать обмен значений соседних элементов.
-    Значениями обмениваются элементы с индексами 0 и 1, 2 и 3
-    и т. д. При нечётном количестве элементов последний сохранить
-    на своём месте. Для заполнения списка элементов нужно использовать
-    функцию input().
-"""
-s = input('Enter a string: ')
-my_list = list(s)
-element = 0
+'''
+    2. Представлен список чисел. Необходимо вывести элементы исходного списка,
+    значения которых больше предыдущего элемента.
+'''
+import random
 
-if (len(s) % 2 == 0):
-    while element < len(my_list):
-        '''
-            Именованные параментры:
-            temp -- временная переменная для перестановки
-            element - индекс символа
-        '''
-        temp = my_list[element]
-        my_list[element] = my_list[element + 1]
-        my_list[element + 1] = temp
-        element += 2
-else:
-    while element < (len(my_list) - 1):
-        temp = my_list[element]
-        my_list[element] = my_list[element + 1]
-        my_list[element + 1] = temp
-        element += 2
-print(my_list)
+my_list = [random.randint(0, 15) for i in range(15)] # создание списка из сгенерированных чисел
+print(f'Input list: {my_list}')                      # вывод исходного списка чисел
+output_list = []
+
+'''
+   Именованные переменные:
+   my_list -- список с исходными сгенерированными числами
+   output_list -- список с итоговыми числами
+'''
+
+for element in range(1, len(my_list)):
+    if my_list[element] > my_list[element - 1]:
+        output_list.append(my_list[element])
+
+print(f'Output list: {output_list}')
