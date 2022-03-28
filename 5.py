@@ -1,30 +1,30 @@
 '''
-    Реализовать структуру «Рейтинг», представляющую собой набор
-    натуральных чисел, который не возрастает. У пользователя нужно
-    запрашивать новый элемент рейтинга. Если в рейтинге существуют
-    элементы с одинаковыми значениями, то новый элемент с тем же
-    значением должен разместиться после них.
+    5. Реализовать формирование списка, используя функцию range() и возможности генератора.
+    В список должны войти чётные числа от 100 до 1000 (включая границы). Нужно получить
+    результат вычисления произведения всех элементов списка.
+'''
+from functools import reduce
+
+'''
+    Функция, отвечающая за умножение
 '''
 
-my_list = [7, 5, 3, 3, 2]
-print(f'Current rating: {my_list}')
-new_rang = input('Enter a number: ')
+def mult_func (a, b):
+    return a * b
 
-if (new_rang.isdigit() == False):
-    print('Enter an integer number')
-else:
-    '''
-        Именованные параметры:
-        new_rang -- ранг, который вводит пользователь
-        list_rang -- список рангов
-    '''
-    new_rang = int(new_rang)
-    for element in range(len(my_list)):
-        if my_list[element] == new_rang:
-            my_list.insert(element + 1, new_rang)
-            break
-        else:
-            my_list.append(new_rang)
-            break
-    my_list.sort(reverse=True)
-    print(f'Your new rating: {my_list}')
+my_list = [element for element in range(100, 1001) if element % 2 == 0]
+print(f'Input list: {my_list}')
+
+'''
+    Именованные переменные:
+    my_list -- список с четными числами от 100 до 1000
+    n -- результат умножения первых двух чисел списка
+    mult_output -- итоговое число
+'''
+
+n = my_list[0]
+for element in range(1, len(my_list)):
+    mult_output = reduce(mult_func, [n, element])
+    n = mult_output
+
+print(f'List multiplication is {mult_output}')
