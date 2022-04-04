@@ -1,104 +1,46 @@
 '''
-    4. Реализуйте базовый класс Car.
-    - у класса должны быть следующие атрибуты: speed, color, name, is_police (булево).
-      А также методы: go, stop, turn(direction), которые должны сообщать, что машина
-      поехала, остановилась, повернула (куда);
-    - опишите несколько дочерних классов: TownCar, SportCar, WorkCar, PoliceCar;
-    - добавьте в базовый класс метод show_speed, который должен показывать текущую
-      скорость автомобиля;
-    - для классов TownCar и WorkCar переопределите метод show_speed. При значении
-      скорости свыше 60 (TownCar) и 40 (WorkCar) должно выводиться сообщение о
-      превышении скорости.
-    - Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ
-      к атрибутам, выведите результат. Вызовите методы и покажите результат.
+    4. Представлен список чисел. Определите элементы списка, не имеющие повторений.
+    Сформируйте итоговый массив чисел, соответствующих требованию. Элементы выведите
+    в порядке их следования в исходном списке. Для выполнения задания обязательно
+    используйте генератор.
 '''
-class Car():
-    def __init__(self, name, color, speed, is_police):
-        self.color = color
-        self.name = name
-        self.speed = speed
-        self.is_police = is_police
+import random
 
-    # методы, отображающие характер движения машины
-    def car_go(self):
-        return 'went'
-    def car_stop(self):
-        return 'stopped'
-    def car_TurnLeft(self):
-        return 'turned left'
-    def car_TurnRight(self):
-        return 'turned right'
-    def car_TurnBack(self):
-        return 'turned back'
+def generator (my_list):
+    for element in my_list:
+        yield element
 
-    # метод для отображения скорости движения машины
-    def show_speed(self):
-        return f'speed is {self.speed}'
+my_list = [random.randint(1, 10) for element in range(10)]
+# print(f'Input list: {my_list}')
 
-class TownCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
 
-    # если скорость городской машины > 60, то выводится сообщение
-    # о превышении скорости в черте города
-    def show_speed(self):
-        if self.speed > 60:
-            return f'Overspeed {self.speed} for town'
-        else:
-            return f'Speed is {self.speed}'
+# print(set(my_list))
+my_list = sorted(my_list)
+print(my_list)
 
-class SportCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+new_list = []
+n = my_list[0]
+temp = []
+out_list = []
 
-class WorkCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+for i in range(0, len(my_list)):
+    if n != my_list[i]:
+       new_list.append(my_list[i])
+       #print(f'n1 = {n}')
+       # i += 1
+       print(f'i = {my_list[i]}')
+       n = my_list[i + 1]
+    elif n == my_list[i]:
+        print(f'i2 = {my_list[i]}')
+       #new_list.append('-')
+        n = my_list[i]
+       #temp.append(my_list[i])
+       #i += 1
 
-    # если скорость городской машины > 40, то выводится сообщение
-    # о превышении скорости для рабочей машины
-    def show_speed(self):
-        if self.speed > 40:
-            return f'Overspeed {self.speed} for work car'
-        else:
-            return f'Speed is {self.speed}'
+        #print(f'n2 = {n}')
 
-class PoliceCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+print(f'output {new_list}')
+#print(f'output2 {temp}')
 
-    # метод, показывающий принадлежность машины к полиции
-    def police_car(self):
-        if self.is_police == True:
-            print(f"{self.name} is a police car")
-        else:
-            print(f"{self.name} isn't a police car")
 
-# проверка работы методов на вывод информации о машинах и их скорости
-a = TownCar('nissan', 'black', 60, False)
-print(f"\ntown car name: {a.name}, color: {a.color}, speed: {a.speed}is police: {a.is_police}")
-print(a.show_speed())
-
-b = SportCar('Audi', 'black', 100, False)
-print(f"\nsport car name: {b.name}, color: {b.color}, speed: {b.speed}, is police: {b.is_police}")
-print(b.show_speed())
-
-c = WorkCar('mercedez', 'white', 41, False)
-print(f"\nwork car name: {c.name}, color: {c.color}, speed: {c.speed}, is police: {c.is_police}")
-print(c.show_speed())
-
-d = PoliceCar('audi', 'white', 60, True)
-print(f"\npolice car name: {d.name}, color: {d.color}, speed: {d.speed}, is police: {d.is_police}")
-print(d.show_speed())
-
-# проверка методов характера движения машины
-print('\nDestination test:')
-print(f"{a.name} {a.car_TurnLeft()} then {a.car_TurnRight()} and finally {a.car_stop()}")
-print(f"{b.name} {a.car_TurnRight()} then {a.car_stop()} and finally {a.car_go()}")
-print(f"{c.name} {a.car_TurnBack()} then {a.car_go()} and finally {a.car_TurnLeft()}")
-
-# проверка полицейских машин
-print('\nPolice test')
-print(f"{a.color} {a.name} belongs to police dpt: {a.is_police}")
-print(f"{c.color} {c.name} belongs to police dpt: {c.is_police}")
-print(f"{d.color} {d.name} belongs to police dpt: {d.is_police}")
+#print(temp)

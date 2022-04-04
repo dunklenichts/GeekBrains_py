@@ -1,32 +1,21 @@
 '''
-    2. Реализовать класс Road (дорога).
-    - определить атрибуты: length (длина), width (ширина);
-    - значения атрибутов должны передаваться при создании
-      экземпляра класса;
-    - атрибуты сделать защищёнными;
-    - определить метод расчёта массы асфальта, необходимого
-      для покрытия всей дороги;
-    - использовать формулу: длина*ширина*масса асфальта для
-      покрытия одного кв. метра дороги асфальтом, толщиной
-      в 1 см*число см толщины полотна;
-    - проверить работу метода.
+    2. Представлен список чисел. Необходимо вывести элементы исходного списка,
+    значения которых больше предыдущего элемента.
 '''
-class Road():
-    def __init__(self, road_lenght, road_width, thickness):
-        self._road_lenght = road_lenght
-        self._road_width = road_width
-        self.thickness = thickness
+import random
 
-    '''
-        Именованные переменные:
-        road_lenght -- длина дороги
-        road_width -- ее ширина
-        thickness -- толщина полотна
-    '''
-    # вычисляем массу асфальта
-    def mass_calc(self):
-        a = self._road_width * self._road_lenght * 25 * self.thickness
-        return a
+my_list = [random.randint(0, 15) for i in range(15)] # создание списка из сгенерированных чисел
+print(f'Input list: {my_list}')                      # вывод исходного списка чисел
+output_list = []
 
-c = Road(20, 5000, 5)
-print(f"{(c.mass_calc()/1000):.0f} т")
+'''
+   Именованные переменные:
+   my_list -- список с исходными сгенерированными числами
+   output_list -- список с итоговыми числами
+'''
+
+for element in range(1, len(my_list)):
+    if my_list[element] > my_list[element - 1]:
+        output_list.append(my_list[element])
+
+print(f'Output list: {output_list}')
