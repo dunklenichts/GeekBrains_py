@@ -1,31 +1,32 @@
 '''
-    1. Создать класс TrafficLight (светофор).
-    - определить у него один атрибут color (цвет) и метод running (запуск);
-    - атрибут реализовать как приватный;
-    - в рамках метода реализовать переключение светофора в режимы:
-      красный, жёлтый, зелёный;
-    - продолжительность первого состояния (красный) составляет
-      7 секунд, второго (жёлтый) — 2 секунды, третьего (зелёный) — на ваше усмотрение;
-    - переключение между режимами должно осуществляться только в указанном
-      порядке (красный, жёлтый, зелёный);
-    - проверить работу примера, создав экземпляр и вызвав описанный метод.
+    1. Реализовать класс Matrix (матрица). Обеспечить перегрузку
+    конструктора класса (метод __init__()), который должен принимать
+    данные (список списков) для формирования матрицы.
+
+    Следующий шаг — реализовать перегрузку метода __str__() для вывода
+    матрицы в привычном виде.
+
+    Далее реализовать перегрузку метода __add__() для реализации
+    операции сложения двух объектов класса Matrix (двух матриц).
+    Результатом сложения должна быть новая матрица.
 '''
-from time import sleep
 
-class TrafficLight:
-    __traffic_color = ['red', 'yellow', 'green']
+class Matrix():
+    def __init__(self, param_1):
+        self.param_1 = param_1
 
-    def traffic_running(self):
-        element = 0
-        while element <= 2:
-            print(f"Traffic light color's {TrafficLight.__traffic_color[element]}")
-            if element == 0:    # красный
-                sleep(7)
-            if element == 1:    # желтый
-                sleep(2)
-            if element == 2:    # зеленый
-                sleep(10)
-            element += 1
+    def __str__(self):
+        for i in self.param_1:
+            print(i)
+        return ''
 
-a = TrafficLight()
-a.traffic_running()
+    def __add__(self, other):
+        for i in range(len(self.param_1)):
+            for j in range(len(other.param_1)):
+                self.param_1[i][j] = self.param_1[i][j] + other.param_1[i][j]
+        return Matrix.__str__(self)
+
+mc = Matrix([[1, 2, 3], [4, 5, 6]])
+mc_2 = Matrix([[2, 3, 4], [5, 6, 7]])
+print(mc)
+print(mc + mc_2)

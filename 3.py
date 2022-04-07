@@ -1,40 +1,52 @@
 '''
-    3. Реализовать базовый класс Worker (работник).
-    - определить атрибуты: name, surname, position (должность), income (доход);
-    - последний атрибут должен быть защищённым и ссылаться на словарь, содержащий
-      элементы: оклад и премия, например, {"wage": wage, "bonus": bonus};
-    - создать класс Position (должность) на базе класса Worker;
-    - в классе Position реализовать методы получения полного имени сотрудника
-      (get_full_name) и дохода с учётом премии (get_total_income);
-    - проверить работу примера на реальных данных: создать экземпляры класса Position,
-      передать данные, проверить значения атрибутов, вызвать методы экземпляров.
+    3. Реализовать программу работы с органическими клетками, состоящими из ячеек.
+    Необходимо создать класс Клетка. В его конструкторе инициализировать параметр,
+    соответствующий количеству ячеек клетки (целое число). В классе должны быть
+    реализованы методы перегрузки арифметических операторов: сложение (__add__()),
+    вычитание (__sub__()), умножение (__mul__()), деление (__truediv__()). Данные
+    методы должны применяться только к клеткам и выполнять увеличение, уменьшение,
+    умножение и целочисленное (с округлением до целого) деление клеток,
+    соответственно.
 '''
 
-class Worker():
-    def __init__ (self, name, surname, position, wage, bonus):
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self.wage = wage
-        self.bonus = bonus
-'''
-    Именованные переменные:
-    name -- имя сотруднка
-    surname -- его фамилия
-    position -- занимаемая должность
-    wage -- оклад
-    bonus -- премия
-'''
-class Position(Worker):
-    def __init__(self, name, surname, position, wage, bonus):
-        super().__init__(name, surname, position, wage, bonus)
-    # получаем полное имя сотрудника
-    def get_full_name (self):
-        return self.name + ' ' + self.surname
-    # выводим его оклад и премию как словарь
-    def get_total_income (self):
-        self._income = {"wage": self.wage, "bonus": self.bonus}
-        return self._income
+class  Cell():
+    def __init__(self, cell_amount):
+        self.cell_amount = cell_amount
+        # if cell_amount.isdigit == True:
+        #     print ('')
+        # else:
+        #     print('Error')
 
-output = Position('Ivan', 'Ivanov', 'engineer', 100, 100)
-print(f"Employee name's: {output.get_full_name()}\nHis income is {output.get_total_income()}")
+    def __str__(self):
+        return self.cell_amount * '*'
+
+    def __add__(self, other):
+        return Cell(self.cell_amount + other.cell_amount)
+
+    def __sub__(self, other):
+        if (self.cell_amount - other.cell_amount) < 0:
+            print ('Error')
+        else:
+            return Cell(self.cell_amount - other.cell_amount)
+
+    def __mul__(self, other):
+        return Cell(self.cell_amount * other.cell_amount)
+
+    def __truediv__(self, other):
+        return Cell(self.cell_amount // other.cell_amount)
+
+    def make_order(self, other):
+        output_str = ''
+        for element in range(self.cell_amount // other):
+            output_str += '*' * other + "\\n"
+        return output_str
+
+cell = Cell(7)
+cell_2 = Cell(2)
+
+print(f'Sum: {cell + cell_2}')
+print(f'Sub: {cell - cell_2}')
+print(f'Mul: {cell * cell_2}')
+print(f"Div: {cell / cell_2}")
+
+print(cell.make_order(7))
