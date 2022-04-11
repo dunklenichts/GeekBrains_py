@@ -1,47 +1,33 @@
 '''
-    2. Реализовать проект расчёта суммарного расхода ткани на производство одежды.
-    Основная сущность (класс) этого проекта — одежда, которая может иметь определённое
-    название. К типам одежды в этом проекте относятся пальто и костюм. У этих типов
-    одежды существуют параметры: размер (для пальто) и рост (для костюма). Это могут
-    быть обычные числа: V и H, соответственно.
-
-    Реализовать общий подсчет расхода ткани. Проверить на практике полученные на этом
-    уроке знания: реализовать абстрактные классы для основных классов проекта, проверить
-    на практике работу декоратора @property.
+    2. Создайте собственный класс-исключение, обрабатывающий ситуацию
+    деления на ноль. Проверьте его работу на данных, вводимых пользователем.
+    При вводе нуля в качестве делителя программа должна корректно обработать
+    эту ситуацию и не завершиться с ошибкой.
 '''
 
-class Clothes():
+class Exception:
+    '''
+        Именованные переменные:
+        divisor -- делимое
+        dividend -- делитель
+    '''
+    def __init__(self, divisor, dividend):
+        self.divisor = divisor
+        self.dividend = dividend
 
-    def __init__(self, coat, height):
-        self.coat = coat
-        self.height = height
+    @staticmethod
+    def null_exception (divisor, dividend):
+        try:
+            return divisor / dividend
+        except:
+            return f'ERROR'
 
-    @property
-    def full_textil(self):
-        return f'{(self.coat / 6.5 + 0.5) + (2 * self.height + 0.3)}'
+mc = Exception(1, 2)
+# пример работы с правильными параментрами
+print(f'{Exception.null_exception(1, 3):.2}')
+print(f'{Exception.null_exception(1, -3):.2}')
+print(f'{Exception.null_exception(1, 0.2):.2}')
 
-    def __str__(self):
-        return f'{(self.coat / 6.5 + 0.5) + (2 * self.height + 0.3):.2}'
-
-class Coat(Clothes):
-    def __init__(self, coat, height):
-        super().__init__(coat, height)
-
-    def __str__(self):
-        return f"{(self.coat / 6.5 + 0.5):.2}"
-
-class Costume(Clothes):
-    def __init__(self, coat, height):
-        super().__init__(coat, height)
-
-    def __str__(self):
-        return f"{(2 * self.height + 0.3):.2}"
-
-mc = Clothes(2, 4)
-print(f"Full amount of textil for both of clothes: {mc}")
-
-coat = Coat(1, 2)
-print(f"Full amount of textil for coat: {coat}")
-
-costume = Costume(3, 4)
-print(f"Full amount of textil for costume: {costume}")
+# пример работы с делением на 0
+print(Exception.null_exception(100, 0))
+print(mc.null_exception(100, 0))

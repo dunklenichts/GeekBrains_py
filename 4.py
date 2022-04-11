@@ -1,104 +1,72 @@
 '''
-    4. Реализуйте базовый класс Car.
-    - у класса должны быть следующие атрибуты: speed, color, name, is_police (булево).
-      А также методы: go, stop, turn(direction), которые должны сообщать, что машина
-      поехала, остановилась, повернула (куда);
-    - опишите несколько дочерних классов: TownCar, SportCar, WorkCar, PoliceCar;
-    - добавьте в базовый класс метод show_speed, который должен показывать текущую
-      скорость автомобиля;
-    - для классов TownCar и WorkCar переопределите метод show_speed. При значении
-      скорости свыше 60 (TownCar) и 40 (WorkCar) должно выводиться сообщение о
-      превышении скорости.
-    - Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ
-      к атрибутам, выведите результат. Вызовите методы и покажите результат.
+    4. Начните работу над проектом «Склад оргтехники». Создайте класс,
+    описывающий склад. А также класс «Оргтехника», который будет базовым
+    для классов-наследников. Эти классы — конкретные типы оргтехники
+    (принтер, сканер, ксерокс). В базовом классе определите параметры,
+    общие для приведённых типов. В классах-наследниках реализуйте параметры,
+    уникальные для каждого типа оргтехники.
 '''
-class Car():
-    def __init__(self, name, color, speed, is_police):
-        self.color = color
+class OfficeEquipStock:
+    def __init__(self, name, price, amount):
         self.name = name
-        self.speed = speed
-        self.is_police = is_police
+        self.price = price
+        self.amount = amount
+        self.dict = {'Name': self.name, 'Amount': self.amount, 'Price': self.price}
+        self.stock = []
 
-    # методы, отображающие характер движения машины
-    def car_go(self):
-        return 'went'
-    def car_stop(self):
-        return 'stopped'
-    def car_TurnLeft(self):
-        return 'turned left'
-    def car_TurnRight(self):
-        return 'turned right'
-    def car_TurnBack(self):
-        return 'turned back'
+    '''
+       5. Продолжить работу над первым заданием. Разработайте методы,
+       которые отвечают за приём оргтехники на склад и передачу в определённое
+       подразделение компании. Для хранения данных о наименовании и
+       количестве единиц оргтехники, а также других данных, можно использовать
+       любую подходящую структуру (например, словарь).
+        6. Продолжить работу над вторым заданием. Реализуйте механизм валидации
+        вводимых пользователем данных. Например, для указания количества принтеров,
+        отправленных на склад, нельзя использовать строковый тип данных.
+    '''
+    def equip_dict(self):
+        try:
+            eq_name = input("Enter item's name: ")
+            eq_amount = int(input("Enter amount of the item: "))
+            eq_price = int(input("Enter the price: "))
+            eq_dict = {'Name': eq_name, 'Amount': eq_amount, 'Price': eq_price}
+            self.dict.update(eq_dict)
+            self.stock.append(self.dict)
+            print(self.stock)
+        except:
+            return f'ERROR'
+        return OfficeEquipStock.equip_dict(self)
 
-    # метод для отображения скорости движения машины
-    def show_speed(self):
-        return f'speed is {self.speed}'
 
-class TownCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+    # @staticmethod
+    # def correct(name, price, amount):
+    #     if name.isdigit == True:
+    #         return f"Enter a valid name"
+    #     elif amount.isdigit == False:
+    #         return f"Enter a valid amount"
+    #     elif price.isdigit == False:
+    #         return f"Enter a valid price"
+    #     else:
+    #         return ''
 
-    # если скорость городской машины > 60, то выводится сообщение
-    # о превышении скорости в черте города
-    def show_speed(self):
-        if self.speed > 60:
-            return f'Overspeed {self.speed} for town'
-        else:
-            return f'Speed is {self.speed}'
+    def __str__(self):
+        return f'Name: {self.name}, Price: {self.price}, Amount: {self.amount}'
 
-class SportCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+class Printer(OfficeEquipStock):
+    def print(self):
+        return 'printed'
 
-class WorkCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+class Scanner(OfficeEquipStock):
+    def scan(self):
+        return 'scanned'
 
-    # если скорость городской машины > 40, то выводится сообщение
-    # о превышении скорости для рабочей машины
-    def show_speed(self):
-        if self.speed > 40:
-            return f'Overspeed {self.speed} for work car'
-        else:
-            return f'Speed is {self.speed}'
+class Xerox(OfficeEquipStock):
+    def copied(self):
+        return 'copied'
 
-class PoliceCar(Car):
-    def __init__(self, name, color, speed, is_police):
-        super().__init__(name, color, speed, is_police)
+printer = Printer('samsung', 5000, 10)
+scanner = Scanner('samsung', 1000, 5)
+xerox = Xerox('Xerox', 4000, 6)
+print(printer.equip_dict())
+print(printer.print())
 
-    # метод, показывающий принадлежность машины к полиции
-    def police_car(self):
-        if self.is_police == True:
-            print(f"{self.name} is a police car")
-        else:
-            print(f"{self.name} isn't a police car")
-
-# проверка работы методов на вывод информации о машинах и их скорости
-a = TownCar('nissan', 'black', 60, False)
-print(f"\ntown car name: {a.name}, color: {a.color}, speed: {a.speed}is police: {a.is_police}")
-print(a.show_speed())
-
-b = SportCar('Audi', 'black', 100, False)
-print(f"\nsport car name: {b.name}, color: {b.color}, speed: {b.speed}, is police: {b.is_police}")
-print(b.show_speed())
-
-c = WorkCar('mercedez', 'white', 41, False)
-print(f"\nwork car name: {c.name}, color: {c.color}, speed: {c.speed}, is police: {c.is_police}")
-print(c.show_speed())
-
-d = PoliceCar('audi', 'white', 60, True)
-print(f"\npolice car name: {d.name}, color: {d.color}, speed: {d.speed}, is police: {d.is_police}")
-print(d.show_speed())
-
-# проверка методов характера движения машины
-print('\nDestination test:')
-print(f"{a.name} {a.car_TurnLeft()} then {a.car_TurnRight()} and finally {a.car_stop()}")
-print(f"{b.name} {a.car_TurnRight()} then {a.car_stop()} and finally {a.car_go()}")
-print(f"{c.name} {a.car_TurnBack()} then {a.car_go()} and finally {a.car_TurnLeft()}")
-
-# проверка полицейских машин
-print('\nPolice test')
-print(f"{a.color} {a.name} belongs to police dpt: {a.is_police}")
-print(f"{c.color} {c.name} belongs to police dpt: {c.is_police}")
-print(f"{d.color} {d.name} belongs to police dpt: {d.is_police}")
