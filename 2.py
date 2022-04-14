@@ -1,33 +1,19 @@
 '''
-    2. Создайте собственный класс-исключение, обрабатывающий ситуацию
-    деления на ноль. Проверьте его работу на данных, вводимых пользователем.
-    При вводе нуля в качестве делителя программа должна корректно обработать
-    эту ситуацию и не завершиться с ошибкой.
+    2. Создать текстовый файл (не программно), сохранить в нём
+    несколько строк, выполнить подсчёт строк и слов в каждой строке.
 '''
 
-class Exception:
-    '''
-        Именованные переменные:
-        divisor -- делимое
-        dividend -- делитель
-    '''
-    def __init__(self, divisor, dividend):
-        self.divisor = divisor
-        self.dividend = dividend
+count = 0
+word_count = 0
+with open("my_file2.txt", "r", encoding="utf-8") as f_obj:
+    print(f_obj.read())
 
-    @staticmethod
-    def null_exception (divisor, dividend):
-        try:
-            return divisor / dividend
-        except:
-            return f'ERROR'
+with open("my_file2.txt", "r", encoding="utf-8") as f_obj:
+    for line in enumerate(f_obj.readlines()):
+        count += 1
+    print(f'Emount of strokes: {count}')
 
-mc = Exception(1, 2)
-# пример работы с правильными параментрами
-print(f'{Exception.null_exception(1, 3):.2}')
-print(f'{Exception.null_exception(1, -3):.2}')
-print(f'{Exception.null_exception(1, 0.2):.2}')
-
-# пример работы с делением на 0
-print(Exception.null_exception(100, 0))
-print(mc.null_exception(100, 0))
+with open("my_file2.txt", "r", encoding="utf-8") as f_obj:
+    content = f_obj.readlines()
+    for word in range(len(content)):
+        print(f'Amount of {word + 1} str is {len(content[word]) - 1}')
