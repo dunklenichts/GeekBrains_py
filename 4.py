@@ -1,72 +1,23 @@
 '''
-    4. Начните работу над проектом «Склад оргтехники». Создайте класс,
-    описывающий склад. А также класс «Оргтехника», который будет базовым
-    для классов-наследников. Эти классы — конкретные типы оргтехники
-    (принтер, сканер, ксерокс). В базовом классе определите параметры,
-    общие для приведённых типов. В классах-наследниках реализуйте параметры,
-    уникальные для каждого типа оргтехники.
+    4. Создать (не программно) текстовый файл со следующим содержимым:
+            One — 1
+            Two — 2
+            Three — 3
+            Four — 4
+    Напишите программу, открывающую файл на чтение и считывающую
+    построчно данные. При этом английские числительные должны заменяться
+    на русские. Новый блок строк должен записываться в новый текстовый
+    файл.
 '''
-class OfficeEquipStock:
-    def __init__(self, name, price, amount):
-        self.name = name
-        self.price = price
-        self.amount = amount
-        self.dict = {'Name': self.name, 'Amount': self.amount, 'Price': self.price}
-        self.stock = []
+rus_words = {'One': 'Один', 'Two': 'Два', 'Three': 'Три', 'Four': 'Четыре'}
+my_list = []
 
-    '''
-       5. Продолжить работу над первым заданием. Разработайте методы,
-       которые отвечают за приём оргтехники на склад и передачу в определённое
-       подразделение компании. Для хранения данных о наименовании и
-       количестве единиц оргтехники, а также других данных, можно использовать
-       любую подходящую структуру (например, словарь).
-        6. Продолжить работу над вторым заданием. Реализуйте механизм валидации
-        вводимых пользователем данных. Например, для указания количества принтеров,
-        отправленных на склад, нельзя использовать строковый тип данных.
-    '''
-    def equip_dict(self):
-        try:
-            eq_name = input("Enter item's name: ")
-            eq_amount = int(input("Enter amount of the item: "))
-            eq_price = int(input("Enter the price: "))
-            eq_dict = {'Name': eq_name, 'Amount': eq_amount, 'Price': eq_price}
-            self.dict.update(eq_dict)
-            self.stock.append(self.dict)
-            print(self.stock)
-        except:
-            return f'ERROR'
-        return OfficeEquipStock.equip_dict(self)
+with open("my_file4.txt", "r", encoding="utf-8") as f_obj:
+    # content = f_obj.read().split('\n')
+    for word in f_obj:
+        word = word.split(' ', 1)
+        my_list.append(rus_words[word[0]] + '' + word[1])
+    print(my_list)
 
-
-    # @staticmethod
-    # def correct(name, price, amount):
-    #     if name.isdigit == True:
-    #         return f"Enter a valid name"
-    #     elif amount.isdigit == False:
-    #         return f"Enter a valid amount"
-    #     elif price.isdigit == False:
-    #         return f"Enter a valid price"
-    #     else:
-    #         return ''
-
-    def __str__(self):
-        return f'Name: {self.name}, Price: {self.price}, Amount: {self.amount}'
-
-class Printer(OfficeEquipStock):
-    def print(self):
-        return 'printed'
-
-class Scanner(OfficeEquipStock):
-    def scan(self):
-        return 'scanned'
-
-class Xerox(OfficeEquipStock):
-    def copied(self):
-        return 'copied'
-
-printer = Printer('samsung', 5000, 10)
-scanner = Scanner('samsung', 1000, 5)
-xerox = Xerox('Xerox', 4000, 6)
-print(printer.equip_dict())
-print(printer.print())
-
+with open ("my_file4_new.txt", "w+", encoding="utf-8") as f_obj:
+    f_obj.writelines(my_list)
